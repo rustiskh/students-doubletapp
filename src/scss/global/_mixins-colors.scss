@@ -1,0 +1,15 @@
+$colors: (
+	black: #000,
+	white: #fff,
+	blue: #49c2e8,
+	gray-devider: #91aeb7,
+);
+:root {
+	// each item in color map
+	@each $name, $color in $colors {
+		--color-#{$name}: #{$color};
+	}
+}
+@function color($color-name) {
+	@return var(--color-#{$color-name});
+}

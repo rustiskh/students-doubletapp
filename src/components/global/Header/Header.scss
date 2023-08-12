@@ -1,0 +1,52 @@
+.header {
+	padding: 19px 29px;
+	box-shadow: 0px 7px 64px 0px rgba(0, 0, 0, 0.07);
+
+	@include mobile {
+		padding: 18.5px 26.5px 19.5px 26.5px;
+	}
+
+	&__content {
+		margin-left: 100px;
+		max-width: 1199px;
+		margin: 0 auto;
+
+		display: flex;
+		align-items: center;
+	}
+
+	&__logo {
+		margin-right: 42.5px;
+		width: 47px;
+		height: 47px;
+
+		img {
+			width: 100%;
+		}
+
+		@include mobile {
+			margin-right: 26px;
+		}
+	}
+
+	&__title {
+		display: flex;
+
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 44px;
+		color: color(black);
+
+		a {
+			color: color(blue);
+			text-decoration: none;
+		}
+
+		@include mobile-small {
+			span {
+				display: none;
+			}
+		}
+	}
+}

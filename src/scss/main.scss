@@ -1,0 +1,31 @@
+@import "global/mixins-media";
+@import "global/mixins-colors";
+@import "global/fonts";
+@import "global/typography";
+@import "/src/components/global/Header/Header.scss";
+@import "/src/pages/StudentsList/StudentsList.scss";
+@import "/src/components/blocks/SearchField/SearchField.scss";
+@import "/src/components/blocks/Sort/Sort.scss";
+@import "/src/components/blocks/StudentsList/StudentsTable/StudentsTable.scss";
+@import "/src/components/blocks/StudentsList/StudentsCard/StudentsCard.scss";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Geometria";
+}
+
+body {
+	overflow-x: hidden;
+}
+
+.container {
+	max-width: 1220px;
+	margin: 0px auto;
+	padding: 0px 20px;
+}
+
+p {
+	cursor: default;
+}
