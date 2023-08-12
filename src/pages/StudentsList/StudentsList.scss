@@ -1,0 +1,78 @@
+.students {
+	&.container {
+		margin-top: 75px;
+
+		@include mobile {
+			margin-top: 39px;
+		}
+	}
+
+	&__title {
+		margin-bottom: 47px;
+
+		@include mobile {
+			margin-bottom: 32px;
+		}
+	}
+
+	&__controls {
+		display: flex;
+
+		.search-field {
+			flex: 1 0 0;
+			margin-right: 20px;
+
+			@include mobile {
+				margin-right: 15px;
+			}
+		}
+
+		.sort {
+			flex-shrink: 0;
+		}
+	}
+
+	&__wrapper {
+		overflow: auto;
+
+		/* Скрытие стрелок */
+		&::-webkit-scrollbar-button {
+			display: none;
+		}
+
+		/* Скрытие подложки */
+		&::-webkit-scrollbar-track {
+			display: none;
+		}
+
+		/* Ширина и цвет ползунка в Firefox */
+		scrollbar-color: color(gray-devider);
+		scrollbar-width: thin;
+
+		/* Скрытие стрелок и подложки в Firefox */
+
+		scrollbar-arrow-color: transparent;
+		scrollbar-track-color: transparent;
+
+		// Стили для chrome
+
+		&::-webkit-scrollbar {
+			width: 2px;
+			background-color: none;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: color(gray-devider);
+			width: 2px;
+			border-radius: 6px;
+		}
+	}
+
+	.students-table {
+		margin-top: 32px;
+	}
+
+	.students-card {
+		margin-top: 10px;
+	}
+}
