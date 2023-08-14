@@ -1,17 +1,60 @@
 import React from "react";
+
 import { useDispatch, useSelector } from "react-redux";
+import { selectorSort, setSort } from "../../../redux/slices/filterSlice";
 
 type PopupClick = MouseEvent & { path: Node[] };
 
+type SortItem = {
+	name: string;
+	sortProperty: string;
+};
+
+export const sortList: SortItem[] = [
+	{
+		name: "Имя А-Я",
+		sortProperty: "name&_order=asc",
+	},
+	{
+		name: "Имя Я-А",
+		sortProperty: "name&_order=desc",
+	},
+	{
+		name: "Сначала моложе",
+		sortProperty: "birthday&_order=desc",
+	},
+	{
+		name: "Сначала старше",
+		sortProperty: "birthday&_order=asc",
+	},
+	{
+		name: "Высокий рейтинг",
+		sortProperty: "rating&_order=desc",
+	},
+	{
+		name: "Низкий рейтинг",
+		sortProperty: "rating&_order=asc",
+	},
+	{
+		name: "Цвет А-Я",
+		sortProperty: "color&_order=asc",
+	},
+	{
+		name: "Цвет Я-А",
+		sortProperty: "color&_order=desc",
+	},
+];
+
 const Sort: React.FC = () => {
 	const dispatch = useDispatch();
-	// const sort = useSelector();
+	const sort = useSelector(selectorSort);
 	const [open, setOpen] = React.useState(false);
 
 	const catalogSort = React.useRef<HTMLDivElement>(null);
 
-	const onClickListItem = () => {
-		// dispatch(setSort(obj));
+	const onClickListItem = (obj: SortItem) => {
+		// @ts-ignore
+		dispatch(setSort(obj));
 		setOpen(false);
 	};
 
@@ -34,7 +77,7 @@ const Sort: React.FC = () => {
 	return (
 		<div ref={catalogSort} className={open ? "sort active" : "sort"} onClick={() => setOpen(!open)}>
 			<div className="sort__label">
-				<span>sort.name</span>
+				<span>{sort.name}</span>
 			</div>
 			<div className="sort__icon">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,8 +91,11 @@ const Sort: React.FC = () => {
 			{open && (
 				<div className="sort__popup">
 					<ul className="sort__popup-list">
-						<li className="sort__popup-list-item">Элемент 1</li>
-						<li className="sort__popup-list-item sort__popup-list-item_active">Active elem</li>
+						{sortList.map((obj) => (
+							<li key={obj.name} onClick={() => onClickListItem(obj)} className={sort.sortProperty === obj.sortProperty ? "sort__popup-list-item sort__popup-list-item_active" : "sort__popup-list-item"}>
+								{obj.name}
+							</li>
+						))}
 					</ul>
 				</div>
 			)}
