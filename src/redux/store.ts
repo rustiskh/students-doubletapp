@@ -1,15 +1,21 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import students from "./slices/studentsSlice";
 import filter from "./slices/filterSlice";
 
-export const store = configureStore({
-	reducer: {
-		students,
-		filter,
-		// paginationFilter,
-		// cart
-	},
+const rootReducer = combineReducers({
+	students,
+	filter,
 });
 
-// export default store;
-export type RootState = ReturnType<typeof store.getState>;
+export const setupStore = () => {
+	return configureStore({
+		reducer: rootReducer,
+		middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+	});
+};
+
+export type RootState = ReturnType<typeof rootReducer>;
+
+export type AppStore = ReturnType<typeof setupStore>;
+
+export type AppDispatch = AppStore["dispatch"];
