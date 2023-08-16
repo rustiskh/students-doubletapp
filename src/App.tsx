@@ -3,7 +3,7 @@
 import Header from "./components/global/Header/Header";
 import StudentsList from "./pages/StudentsList/StudentsList";
 import "./scss/main.scss";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
 	return (

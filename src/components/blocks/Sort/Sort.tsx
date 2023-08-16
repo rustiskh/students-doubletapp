@@ -1,16 +1,11 @@
 import React from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-import { selectorSort, setSort } from "../../../redux/slices/filterSlice";
+import { useSelector } from "react-redux";
+import { Sort as SortType, selectorSort, setSort } from "../../../redux/slices/filterSlice";
+import { useAppDispatch } from "../../../shared/hooks/redux";
 
 type PopupClick = MouseEvent & { path: Node[] };
 
-type SortItem = {
-	name: string;
-	sortProperty: string;
-};
-
-export const sortList: SortItem[] = [
+export const sortList: SortType[] = [
 	{
 		name: "Имя А-Я",
 		sortProperty: "name&_order=asc",
@@ -46,14 +41,13 @@ export const sortList: SortItem[] = [
 ];
 
 const Sort: React.FC = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const sort = useSelector(selectorSort);
 	const [open, setOpen] = React.useState(false);
 
 	const catalogSort = React.useRef<HTMLDivElement>(null);
 
-	const onClickListItem = (obj: SortItem) => {
-		// @ts-ignore
+	const onClickListItem = (obj: SortType) => {
 		dispatch(setSort(obj));
 		setOpen(false);
 	};

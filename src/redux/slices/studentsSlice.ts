@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../store";
+import { ParsedQs } from "qs";
 
 export interface SudentElement {
 	id: number;
@@ -25,9 +26,9 @@ const initialState: StudentsSliceState = {
 	status: "loading",
 };
 
-interface FetchStudentsParams {
-	sortProp: string;
-	searchProp?: string;
+export interface FetchStudentsParams {
+	sortProp: string | ParsedQs | string[] | ParsedQs[] | undefined;
+	searchProp?: string | ParsedQs | string[] | ParsedQs[] | undefined;
 }
 
 export const fetchStudents = createAsyncThunk("students/fetchStudents", async ({ sortProp, searchProp }: FetchStudentsParams, { rejectWithValue }) => {
@@ -37,15 +38,14 @@ export const fetchStudents = createAsyncThunk("students/fetchStudents", async ({
 		const { data } = await axios.get<SudentElement[]>(`http://localhost:3008/students?${sortQuery}${searchByNameQuery}`);
 		return data as SudentElement[];
 	} catch (error: any) {
-		alert("Ошибка при получении списка студентов!");
 		return rejectWithValue(error.message);
 	}
 });
 
-export const deleteStudent = createAsyncThunk("students/deleteStudent", async ({ id }: SudentElement, { rejectWithValue, dispatch }) => {
+export const deleteStudent = createAsyncThunk("students/deleteStudent", async (studentId: number, { rejectWithValue, dispatch }) => {
 	try {
-		await axios.delete<SudentElement[]>(`http://localhost:3008/students/${id}`);
-		dispatch(removeStudent({ id }));
+		await axios.delete<SudentElement[]>(`http://localhost:3008/students/${studentId}`);
+		dispatch(removeStudent(studentId));
 	} catch (error: any) {
 		alert("Ошибка при удалении студента!");
 		return rejectWithValue(error.message);
@@ -60,7 +60,7 @@ export const studentsSlice = createSlice({
 			state.list = action.payload;
 		},
 		removeStudent(state, action) {
-			state.list = state.list.filter((list) => list.id !== action.payload.id);
+			state.list = state.list.filter((list) => list.id !== action.payload);
 		},
 	},
 	extraReducers(builder) {
@@ -84,3 +84,4 @@ export const { getStudentsList, removeStudent } = studentsSlice.actions;
 export default studentsSlice.reducer;
 
 export const selectStudents = (state: RootState) => state.students.list;
+export const stateStudents = (state: RootState) => state.students;

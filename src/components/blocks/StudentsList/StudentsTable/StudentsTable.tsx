@@ -1,27 +1,14 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { SudentElement, deleteStudent } from "../../../../redux/slices/studentsSlice";
-
-const calculateAge = (birthday: string) => {
-	const birthDate = new Date(birthday);
-	const currentDate = new Date();
-
-	let age = currentDate.getFullYear() - birthDate.getFullYear();
-
-	if (currentDate.getMonth() < birthDate.getMonth() || (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())) {
-		age--;
-	}
-
-	return age;
-};
+import { calculateAge } from "../../../../shared/helpers/calculate-age";
+import { useAppDispatch } from "../../../../shared/hooks/redux";
 
 const StudentsTable: React.FC<SudentElement> = ({ id, name, specialty, group, birthday, rating, color, avatar }) => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const age = calculateAge(birthday);
 
 	const handleDelete = () => {
-		// @ts-ignore
-		dispatch(deleteStudent({ id }));
+		dispatch(deleteStudent(id));
 	};
 
 	return (
