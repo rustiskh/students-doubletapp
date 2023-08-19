@@ -1,5 +1,3 @@
-// import logo from './logo.svg';
-// import './App.css';
 import Header from "./components/global/Header/Header";
 import StudentsList from "./pages/StudentsList/StudentsList";
 import "./scss/main.scss";

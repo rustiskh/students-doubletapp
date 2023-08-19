@@ -23,7 +23,7 @@
 	},
 	"include": [
 		"src",
-		"src/@types"
+		"src/shared/@types"
 		// *** The files TypeScript should type check ***
 	]
 	// "exclude": ["node_modules", "build"] // *** The files to not type check ***

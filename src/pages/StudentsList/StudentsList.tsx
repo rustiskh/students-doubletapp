@@ -6,11 +6,10 @@ import StudentsTable from "../../components/blocks/StudentsList/StudentsTable/St
 
 import useResize from "../../shared/hooks/use-resize/useResize";
 import { useSelector } from "react-redux";
-import { selectorSort, selectorSortSearch, setSort } from "../../redux/slices/filterSlice";
-import { fetchStudents, selectStudents, stateStudents } from "../../redux/slices/studentsSlice";
 import { useAppDispatch } from "../../shared/hooks/redux";
 import { useNavigate } from "react-router-dom";
 import qs from "qs";
+import { fetchStudents, selectStudents, selectorSort, selectorSortSearch, setSort, stateStudents } from "../../redux/slices";
 
 const StudentsList: React.FC = () => {
 	const { isScreenMob } = useResize();

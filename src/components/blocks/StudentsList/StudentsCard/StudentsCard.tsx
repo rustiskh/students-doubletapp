@@ -1,9 +1,9 @@
 import React from "react";
-import { SudentElement, deleteStudent } from "../../../../redux/slices/studentsSlice";
 import { calculateAge } from "../../../../shared/helpers/calculate-age";
 import { useAppDispatch } from "../../../../shared/hooks/redux";
+import { StudentElement, deleteStudent } from "../../../../redux/slices";
 
-const StudentsCard: React.FC<SudentElement> = ({ id, name, specialty, group, birthday, rating, color, avatar }) => {
+const StudentsCard: React.FC<StudentElement> = ({ id, name, specialty, group, birthday, rating, color, avatar }) => {
 	const dispatch = useAppDispatch();
 
 	const age = calculateAge(birthday);

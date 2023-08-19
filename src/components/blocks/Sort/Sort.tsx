@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Sort as SortType, selectorSort, setSort } from "../../../redux/slices/filterSlice";
 import { useAppDispatch } from "../../../shared/hooks/redux";
+import { Sort as SortType, selectorSort, setSort } from "../../../redux/slices";
 
 type PopupClick = MouseEvent & { path: Node[] };
 
