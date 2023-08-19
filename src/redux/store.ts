@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import students from "./slices/studentsSlice";
-import filter from "./slices/filterSlice";
+import { students } from "./slices";
+import { filter } from "./slices";
 
 const rootReducer = combineReducers({
-	students,
-	filter,
+	students: students,
+	filter: filter,
 });
 
 export const setupStore = () => {

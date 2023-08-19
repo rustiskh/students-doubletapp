@@ -1,17 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../store";
-import { ParsedQs } from "qs";
-
-export type Sort = {
-	name?: string;
-	sortProperty: "name&_order=asc" | "name&_order=desc" | "birthday&_order=asc" | "birthday&_order=desc" | "rating&_order=asc" | "rating&_order=desc" | "color&_order=desc" | "color&_order=asc" | string | ParsedQs | string[] | ParsedQs[] | undefined;
-	searchValue?: string;
-};
-
-interface FilterSliceState {
-	searchValue: string;
-	sort: Sort;
-}
+import { RootState } from "../../../store";
+import { FilterSliceState, Sort } from "./types";
 
 const initialState: FilterSliceState = {
 	searchValue: "",
@@ -42,4 +31,4 @@ export const selectorSortSearch = (state: RootState) => state.filter.searchValue
 
 export const { setSort, setParseSort, setSearchValue } = filterSlice.actions;
 
-export default filterSlice.reducer;
+export const filter = filterSlice.reducer;

@@ -1,5 +1,5 @@
 import React from "react";
-import { SCREEN_MOB_SMALL, SCREEN_MOB, SCREEN_TABLET, SCREEN_LAPTOP, SCREEN_PC } from "../../../constants/screenSizes";
+import { SCREEN_MOB_SMALL, SCREEN_MOB, SCREEN_TABLET, SCREEN_LAPTOP, SCREEN_PC } from "../../constants/screenSizes";
 
 const useResize = () => {
 	const [width, setWidth] = React.useState(window.innerWidth);
