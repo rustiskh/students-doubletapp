@@ -1,0 +1,25 @@
+.button-textual {
+	text-decoration: none;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	color: color(black);
+	width: auto;
+
+	&__icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-right: 15px;
+	}
+
+	&__text {
+	}
+
+	&_icony {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}

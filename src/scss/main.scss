@@ -2,8 +2,10 @@
 @import "global/mixins-colors";
 @import "global/fonts";
 @import "global/typography";
+@import "global/buttons";
 @import "/src/components/global/Header/Header.scss";
 @import "/src/pages/StudentsList/StudentsList.scss";
+@import "/src/pages/StudentAdd/StudentAdd.scss";
 @import "/src/components/blocks/SearchField/SearchField.scss";
 @import "/src/components/blocks/Sort/Sort.scss";
 @import "/src/components/blocks/StudentsList/StudentsTable/StudentsTable.scss";

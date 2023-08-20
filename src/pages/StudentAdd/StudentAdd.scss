@@ -1,0 +1,27 @@
+.student-add {
+	&.container {
+		margin-top: 22px;
+
+		@include mobile {
+			margin-top: 29px;
+		}
+	}
+
+	&__back-btn {
+		justify-content: start;
+		text-transform: uppercase;
+		max-width: 315px;
+	}
+
+	&__title {
+		margin-top: 30px;
+
+		@include mobile {
+			margin-top: 17px;
+		}
+	}
+
+	&__content {
+		margin-top: 28px;
+	}
+}

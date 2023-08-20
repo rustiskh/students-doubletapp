@@ -7,11 +7,54 @@
 		}
 	}
 
-	&__title {
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 22px;
 		margin-bottom: 47px;
 
 		@include mobile {
 			margin-bottom: 32px;
+		}
+	}
+
+	&__title {
+	}
+
+	&__add-btn {
+		text-decoration: none;
+		background-color: color(blue);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 15px 0px 15px 0px;
+		border-radius: 10px;
+		max-width: 340px;
+		width: 100%;
+
+		&:hover {
+			.students__add-btn-icon {
+				transform: rotate(180deg);
+			}
+		}
+
+		&-icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 15px;
+			transition: transform 0.5s ease-in-out;
+		}
+
+		&-text {
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: 20px;
+			color: color(white);
+			white-space: nowrap;
 		}
 	}
 
