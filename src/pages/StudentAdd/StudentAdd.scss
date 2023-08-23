@@ -11,6 +11,20 @@
 		justify-content: start;
 		text-transform: uppercase;
 		max-width: 315px;
+
+		&__icon {
+			svg {
+				transition: transform 0.2s ease-in;
+			}
+		}
+
+		&:hover {
+			.student-add__back-btn__icon {
+				svg {
+					transform: translateX(-2px);
+				}
+			}
+		}
 	}
 
 	&__title {
@@ -23,5 +37,76 @@
 
 	&__content {
 		margin-top: 28px;
+	}
+
+	&-form {
+		max-height: 660px;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+
+		&__element {
+			max-width: 380px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		&-input,
+		&-select-container {
+			margin-top: 8px;
+		}
+
+		&-input {
+			padding: 16px 0 16px 20px;
+			border-radius: 6px;
+			border: none;
+			box-shadow: 0px 7px 64px 0px rgba(0, 0, 0, 0.07);
+
+			color: color(black);
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 20px;
+
+			&::placeholder {
+				color: color(gray-placeholder);
+			}
+
+			&:focus {
+				outline: 1px solid rgba(0, 0, 0, 0.8);
+			}
+		}
+
+		// &-select {
+		// 	&__control {
+		// 		border-radius: 6px !important;
+		// 		border: none !important;
+		// 		box-shadow: 0px 7px 64px 0px rgba(0, 0, 0, 0.07) !important;
+		// 		padding: 16px 0 16px 20px;
+
+		// 		color: color(black);
+		// 		font-size: 16px;
+		// 		font-style: normal;
+		// 		font-weight: 400;
+		// 		line-height: 20px;
+
+		// 		&::placeholder {
+		// 			color: color(gray-placeholder);
+		// 		}
+
+		// 		&:focus {
+		// 			outline: 1px solid rgba(0, 0, 0, 0.8);
+		// 		}
+		// 	}
+
+		// 	&__value-container {
+		// 		padding: 0 !important;
+		// 	}
+
+		// 	&__input-container {
+		// 		margin: 0 !important;
+		// 		padding: 0 !important;
+		// 	}
+		// }
 	}
 }
