@@ -1,14 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { removeStudent } from "./studentsSlice";
-import { FetchStudentsParams, StudentElement } from "./types";
+import { FetchStudentsParams, StudentElement, StudentsResponse } from "./types";
+import { sortStudentsByProperty } from "../../filterSlice/model/filterSlice.thunk";
 
-export const fetchStudents = createAsyncThunk("students/fetchStudents", async ({ sortProp, searchProp }: FetchStudentsParams, { rejectWithValue }) => {
-	const sortQuery = `_sort=${sortProp}`;
-	const searchByNameQuery = searchProp === "" ? "" : `&name_like=${searchProp}`;
+export const fetchStudents = createAsyncThunk("students/fetchStudents", async (_, { rejectWithValue }) => {
+	// const sortQuery = `_sort=${sortProp}`;
+	// const searchByNameQuery = searchProp === "" ? "" : `&name_like=${searchProp}`;
 	try {
-		const { data } = await axios.get<StudentElement[]>(`http://localhost:3008/students?${sortQuery}${searchByNameQuery}`);
-		return data as StudentElement[];
+		// const { data } = await axios.get<StudentElement[]>(`http://localhost:3008/students?${sortQuery}${searchByNameQuery}`);
+		const { data } = await axios.get<StudentsResponse>(`https://front-assignment-api.2tapp.cc/api/persons`);
+		console.log(data.students);
+		// return sortStudentsByProperty(data.students, "name", "asc") as StudentElement[];
+		return data.students as StudentElement[];
 	} catch (error: any) {
 		return rejectWithValue(error.message);
 	}
@@ -16,7 +20,7 @@ export const fetchStudents = createAsyncThunk("students/fetchStudents", async ({
 
 export const deleteStudent = createAsyncThunk("students/deleteStudent", async (studentId: number, { rejectWithValue, dispatch }) => {
 	try {
-		await axios.delete<StudentElement[]>(`http://localhost:3008/students/${studentId}`);
+		console.log("Здесь отправляем запрос на сервер для удаления элемента");
 		dispatch(removeStudent(studentId));
 	} catch (error: any) {
 		alert("Ошибка при удалении студента!");

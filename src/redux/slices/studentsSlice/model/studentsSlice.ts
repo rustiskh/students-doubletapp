@@ -15,6 +15,10 @@ export const studentsSlice = createSlice({
 		getStudentsList(state, action) {
 			state.list = action.payload;
 		},
+		// ???????
+		setSortedStudents: (state, action) => {
+			state.list = action.payload;
+		},
 		removeStudent(state, action) {
 			state.list = state.list.filter((list) => list.id !== action.payload);
 		},
@@ -35,7 +39,7 @@ export const studentsSlice = createSlice({
 	},
 });
 
-export const { getStudentsList, removeStudent } = studentsSlice.actions;
+export const { getStudentsList, removeStudent, setSortedStudents } = studentsSlice.actions;
 
 export const students = studentsSlice.reducer;
 

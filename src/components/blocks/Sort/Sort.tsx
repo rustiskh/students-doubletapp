@@ -8,35 +8,43 @@ type PopupClick = MouseEvent & { path: Node[] };
 export const sortList: SortType[] = [
 	{
 		name: "Имя А-Я",
-		sortProperty: "name&_order=asc",
+		key: "name",
+		direction: "asc",
 	},
 	{
 		name: "Имя Я-А",
-		sortProperty: "name&_order=desc",
+		key: "name",
+		direction: "desc",
 	},
 	{
 		name: "Сначала моложе",
-		sortProperty: "birthday&_order=desc",
+		key: "birthday",
+		direction: "desc",
 	},
 	{
 		name: "Сначала старше",
-		sortProperty: "birthday&_order=asc",
+		key: "birthday",
+		direction: "asc",
 	},
 	{
 		name: "Высокий рейтинг",
-		sortProperty: "rating&_order=desc",
+		key: "rating",
+		direction: "desc",
 	},
 	{
 		name: "Низкий рейтинг",
-		sortProperty: "rating&_order=asc",
+		key: "rating",
+		direction: "asc",
 	},
 	{
 		name: "Цвет А-Я",
-		sortProperty: "color&_order=asc",
+		key: "color",
+		direction: "asc",
 	},
 	{
 		name: "Цвет Я-А",
-		sortProperty: "color&_order=desc",
+		key: "color",
+		direction: "desc",
 	},
 ];
 
@@ -86,7 +94,7 @@ const Sort: React.FC = () => {
 				<div className="sort__popup">
 					<ul className="sort__popup-list">
 						{sortList.map((obj) => (
-							<li key={obj.name} onClick={() => onClickListItem(obj)} className={sort.sortProperty === obj.sortProperty ? "sort__popup-list-item sort__popup-list-item_active" : "sort__popup-list-item"}>
+							<li key={obj.name} onClick={() => onClickListItem(obj)} className={sort.key === obj.key && sort.direction === obj.direction ? "sort__popup-list-item sort__popup-list-item_active" : "sort__popup-list-item"}>
 								{obj.name}
 							</li>
 						))}

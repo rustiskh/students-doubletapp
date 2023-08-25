@@ -6,7 +6,8 @@ const initialState: FilterSliceState = {
 	searchValue: "",
 	sort: {
 		name: "Имя А-Я",
-		sortProperty: "name&_order=asc",
+		key: "name",
+		direction: "asc",
 	},
 };
 

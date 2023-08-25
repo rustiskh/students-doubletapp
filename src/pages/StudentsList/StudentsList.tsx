@@ -1,15 +1,13 @@
 import React from "react";
 import SearchField from "../../components/blocks/SearchField/SearchField";
-import Sort, { sortList } from "../../components/blocks/Sort/Sort";
+import Sort from "../../components/blocks/Sort/Sort";
 import StudentsCard from "../../components/blocks/StudentsList/StudentsCard/StudentsCard";
 import StudentsTable from "../../components/blocks/StudentsList/StudentsTable/StudentsTable";
-
 import useResize from "../../shared/hooks/use-resize/useResize";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../shared/hooks/redux";
-import { useNavigate } from "react-router-dom";
-import qs from "qs";
-import { fetchStudents, selectStudents, selectorSort, selectorSortSearch, setSort, stateStudents } from "../../redux/slices";
+import { fetchStudents, selectStudents, selectorSort, selectorSortSearch, stateStudents } from "../../redux/slices";
+import { sortStudentsByProperty } from "../../redux/slices/filterSlice/model/filterSlice.thunk";
 
 const StudentsList: React.FC = () => {
 	const { isScreenMob } = useResize();
@@ -19,46 +17,11 @@ const StudentsList: React.FC = () => {
 	const searchValue: string = useSelector(selectorSortSearch);
 
 	React.useEffect(() => {
-		//если в адреске не было параметров - делайем запрос по-умолчанию
-		if (!isSearch.current) {
-			dispatch(fetchStudents({ sortProp: sort.sortProperty, searchProp: searchValue }));
-		}
-
-		isSearch.current = false;
-	}, [dispatch, sort, searchValue]);
+		dispatch(fetchStudents());
+	}, [dispatch]);
 
 	const studentCard = useSelector(selectStudents);
-
-	// Вшивание параметров в URL
-	const navigate = useNavigate();
-	// Не выводить при первом рендере
-	const isMounted = React.useRef(false);
-	// Парсим поиск
-	const isSearch = React.useRef(false);
-
-	React.useEffect(() => {
-		if (isMounted.current) {
-			const queryString = qs.stringify({
-				sortProperty: sort.sortProperty,
-				searchValue,
-			});
-			navigate(`?${queryString}`);
-		}
-		isMounted.current = true;
-	}, [searchValue, sort, navigate]);
-
-	// Парсим из адресной строки
-	React.useEffect(() => {
-		if (window.location.search) {
-			const params = qs.parse(window.location.search.substring(1));
-
-			const sortName = sortList.find((obj) => obj.sortProperty === params.sortProperty);
-
-			dispatch(fetchStudents({ sortProp: params.sortProperty, searchProp: params.searchValue }));
-			dispatch(setSort({ sortProperty: params.sortProperty, name: sortName?.name }));
-			isSearch.current = true;
-		}
-	}, [dispatch]);
+	let sortedStudentsCard = sortStudentsByProperty(studentCard, sort.key, sort.direction, searchValue);
 
 	return (
 		<div className="students container">
@@ -89,13 +52,13 @@ const StudentsList: React.FC = () => {
 								</tr>
 							</thead>
 							<tbody className="students-table__body">
-								{studentCard.map((obj) => (
+								{sortedStudentsCard.map((obj) => (
 									<StudentsTable key={obj.id} {...obj} />
 								))}
 							</tbody>
 						</table>
 					) : (
-						studentCard.map((obj) => <StudentsCard key={obj.id} {...obj} />)
+						sortedStudentsCard.map((obj) => <StudentsCard key={obj.id} {...obj} />)
 					)}
 				</div>
 			</div>
